@@ -1,0 +1,85 @@
+{
+  "name": "todo-angula",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "todo-angular-express",
+  "sourceRoot": "apps/todo-angula/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/todo-angula",
+        "index": "apps/todo-angula/src/index.html",
+        "browser": "apps/todo-angula/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/todo-angula/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/todo-angula/src/favicon.ico",
+          "apps/todo-angula/src/assets"
+        ],
+        "styles": ["apps/todo-angula/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/todo-angula/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/todo-angula/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "todo-angula:build:production"
+        },
+        "development": {
+          "buildTarget": "todo-angula:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "todo-angula:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/todo-angula/jest.config.ts"
+      }
+    }
+  }
+}
