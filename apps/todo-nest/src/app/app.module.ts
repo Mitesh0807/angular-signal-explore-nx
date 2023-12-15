@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
-// postgres: postgresql://postgres:password@localhost:5432/todo
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -19,6 +19,7 @@ import { UserEntity } from '../entity/user.entity';
       autoLoadEntities: true
     }),
     TypeOrmModule.forFeature([UserEntity]),
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,53 @@
+{
+  "name": "todo-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/todo-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/todo-service",
+        "main": "apps/todo-service/src/main.ts",
+        "tsConfig": "apps/todo-service/tsconfig.app.json",
+        "assets": ["apps/todo-service/src/assets"],
+        "webpackConfig": "apps/todo-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "todo-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "todo-service:build:development"
+        },
+        "production": {
+          "buildTarget": "todo-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/todo-service/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
