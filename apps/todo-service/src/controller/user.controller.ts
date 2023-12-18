@@ -9,14 +9,10 @@ export const createUser = asyncErorHandler(
     user.name = req.body.name;
     user.email = req.body.email;
     user.password = req.body.password;
-    user.isActive = true;
-    user.createdAt = new Date();
-    user.updatedAt = new Date();
-    user.deletedAt = new Date();
     const result = myDataSource.getRepository(User).save(user);
     res.send(result);
   }
-)
+);
 
 export const findUser = asyncErorHandler(async (req: Request, res: Response): Promise<void> => {
   const user_id = req.params.id;
@@ -25,10 +21,9 @@ export const findUser = asyncErorHandler(async (req: Request, res: Response): Pr
     return;
   }
   let user_num = Number(user_id);
-  console.log(user_num);
   const result = await myDataSource
     .getRepository(User)
-    .findOneBy({ id: user_num });
+    .find({ where: { id: user_num }, relations: { projects: true } });
   res.send(result);
 });
 
@@ -45,7 +40,6 @@ export const updateUser = asyncErorHandler(async (req: Request, res: Response): 
   res.send(result);
 });
 export const getAllUser = asyncErorHandler(async (req: Request, res: Response): Promise<void> => {
-  console.log("why ");
   const result = await myDataSource
     .getRepository(User)
     .find();

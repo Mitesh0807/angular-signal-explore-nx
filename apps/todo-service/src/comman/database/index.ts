@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 import { User } from "../../entity/User.entity";
+import { Project } from "../../entity/Project.entity";
 
 //postgresql connection user postgresql password postgres host localhost port 5433 database todo
 export const myDataSource = new DataSource({
@@ -11,7 +12,7 @@ export const myDataSource = new DataSource({
   database: "todo",
   synchronize: true,
   logging: false,
-  entities: [User],
+  entities: [User, Project],
   migrations: ["dist/migration/*.js"],
   subscribers: ["dist/subscriber/*.js"],
 });

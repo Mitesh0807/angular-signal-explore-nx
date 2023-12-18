@@ -1,10 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Project } from './Project.entity';
 
 export type TUser = {
   id: number,
   name: string,
   email: string,
   password: string,
+  projects: Project[],
   isActive: boolean,
   createdAt: Date,
   updatedAt: Date,
@@ -24,16 +26,19 @@ export class User {
 
   @Column()
   password: string;
-  //default true
+
+  @OneToMany(() => Project, (project) => project.user_id)
+  projects: Project[];
+
   @Column({ default: true })
   isActive: boolean;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column()
+  @DeleteDateColumn()
   deletedAt: Date;
 }
