@@ -65,5 +65,6 @@
       "style": "scss"
     }
   },
-  "nxCloudAccessToken": "NTE0MzY3OWItOWVhNy00NDkyLWEyMGEtYTJlMDgxZTRlODNmfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NTE0MzY3OWItOWVhNy00NDkyLWEyMGEtYTJlMDgxZTRlODNmfHJlYWQtd3JpdGU=",
+  "plugins": ["@monodon/rust"]
 }

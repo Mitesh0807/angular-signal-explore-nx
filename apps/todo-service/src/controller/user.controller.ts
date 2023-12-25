@@ -9,7 +9,12 @@ export const createUser = asyncErorHandler(
     user.name = req.body.name;
     user.email = req.body.email;
     user.password = req.body.password;
-    const result = myDataSource.getRepository(User).save(user);
+    // const result = myDataSource.getRepository(User).save(user);
+    const result = myDataSource.getRepository(User).create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password
+    })
     res.send(result);
   }
 );

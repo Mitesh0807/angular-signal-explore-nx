@@ -9,7 +9,11 @@ export const createProject = asyncErorHandler(
     project.project_name = req.body.project_name;
     const user = await myDataSource.getRepository(User).findOneBy({ id: Number(req.body.user_id) });
     project.user_id = user;
-    const result = myDataSource.getRepository(Project).save(project);
+    const result = myDataSource.getRepository(Project).create({
+      project_name: req.body.project_name,
+      user_id: user
+    });
+    // const result = myDataSource.getRepository(Project).save(project);
     res.send(result);
   }
 );

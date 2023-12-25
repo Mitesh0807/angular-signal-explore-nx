@@ -1,0 +1,59 @@
+[package]
+name = "apps_todo_rust_todo_rust"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+actix-web = "4"
+
+[dependencies.sqlx]
+version = "0.6"
+default-features = false
+features = [
+  "runtime-actix-rustls",
+  "macros",
+  "postgres",
+  "uuid",
+  "chrono",
+  "migrate",
+  "offline"
+]
+
+[dependencies.uuid]
+version = "1"
+features = ["v4"]
+
+
+[ dependencies.chrono ]
+version = "0.4"
+features = ["serde"]
+
+[ dependencies.serde ]
+version = "1"
+features = ["derive"]
+
+
+[workspace.dependencies]
+sqlx = { version = "0.6", default-features = false, features = ["runtime-actix-rustls", "macros", "postgres", "uuid", "chrono", "migrate", "offline"] }
+
+[workspace.dependencies.uuid]
+version = "1"
+features = ["v4"]
+
+
+[workspace.dependencies.chrono]
+version = "0.4"
+features = ["serde"]
+
+[workspace.dependencies.serde]
+version = "1"
+features = ["derive"]
+
+
+[profile.release]
+lto = true
+
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
